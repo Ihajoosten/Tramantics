@@ -10,6 +10,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
     "core-js": "^3.8.3",
     "postcss": "^8.4.31",
     "register-service-worker": "^1.7.2",
@@ -20,6 +21,7 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
