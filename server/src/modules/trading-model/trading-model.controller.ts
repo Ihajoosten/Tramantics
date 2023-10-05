@@ -8,21 +8,23 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { TradingModelService } from './trading-model.service';
-import { TradingModel } from './trading-model.entity';
-import { CreateTradingModelDTO } from './dto/create-trading-model.dto';
-import { UpdateTradingModelDTO } from './dto/update-trading-model.dto';
 import {
   ApiBearerAuth,
   ApiOkResponse,
   ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiUnprocessableEntityResponse,
+  ApiTags,
 } from '@nestjs/swagger';
+import { TradingModelService } from './trading-model.service';
+import { TradingModel } from './trading-model.entity';
+import { CreateTradingModelDTO } from './dto/create-trading-model.dto';
+import { UpdateTradingModelDTO } from './dto/update-trading-model.dto';
 import { Roles } from 'src/core/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/core/guards/roles.guard';
 
+@ApiTags('Trading Model')
 @Controller('trading-models')
 export class TradingModelController {
   constructor(private readonly tradingModelService: TradingModelService) {}
