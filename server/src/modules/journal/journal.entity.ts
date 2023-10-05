@@ -3,19 +3,21 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
+  Scopes,
   Table,
 } from 'sequelize-typescript';
+import { Trade } from '../trade/trade.entity';
 import { User } from '../user/user.entity';
 
-export enum MarketType {
-  EXPANSION = 'Expansion',
-  REVERSAL = 'Reversal',
-  CONSOLIDATION = 'Consolidation',
-}
-
 @Table
-export class TradingModel extends Model<TradingModel> {
+@Scopes(() => ({
+  full: {
+    include: [Trade],
+  },
+}))
+export class Journal extends Model<Journal> {
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -23,20 +25,14 @@ export class TradingModel extends Model<TradingModel> {
   })
   uuid: string;
 
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  name: string;
-
   @Column({ type: DataType.STRING, allowNull: false })
-  type: string;
+  name: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
   summary: string;
 
-  @Column({
-    type: DataType.ARRAY(DataType.ENUM({ values: Object.values(MarketType) })),
-    allowNull: false,
-  })
-  marketCondition: Array<MarketType>;
+  @HasMany(() => Trade)
+  trades: Array<Trade>;
 
   @ForeignKey(() => User)
   @Column

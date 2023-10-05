@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Trade } from '../trade/trade.entity';
 import { TradingModel } from '../trading-model/trading-model.entity';
+import { Journal } from '../journal/journal.entity';
 
 export enum UserRole {
   ADMIN = 'Admin',
@@ -72,4 +73,7 @@ export class User extends Model<User> {
 
   @HasMany(() => TradingModel)
   tradingModels: Array<TradingModel>;
+
+  @HasMany(() => Journal)
+  journals: Array<Journal>;
 }

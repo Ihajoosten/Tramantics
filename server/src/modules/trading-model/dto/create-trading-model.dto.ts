@@ -25,4 +25,8 @@ export class CreateTradingModelDTO {
   @ArrayNotEmpty()
   @IsEnum(MarketType, { each: true })
   marketCondition: Array<MarketType>;
+
+  @IsNotEmpty()
+  @IsString()
+  authorId: string;
 }
