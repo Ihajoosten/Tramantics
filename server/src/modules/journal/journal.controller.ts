@@ -18,16 +18,23 @@ import {
   ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiUnprocessableEntityResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from 'src/core/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/core/guards/roles.guard';
 
+@ApiTags('Journal')
 @Controller('journals')
 export class JournalController {
   constructor(private readonly journalService: JournalService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'The resource was created successfully' })
+  @ApiForbiddenResponse({ description: 'Unauthorized Request' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin', 'Customer')
   create(@Body() createJournalDTO: CreateJournalDTO): Promise<Journal> {
     return this.journalService.create(createJournalDTO);
   }

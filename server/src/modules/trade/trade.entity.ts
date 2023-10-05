@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { TradingModel } from '../trading-model/trading-model.entity';
 import { User } from '../user/user.entity';
+import { Journal } from '../journal/journal.entity';
 
 export enum DayOfWeek {
   MONDAY = 'Monday',
@@ -45,11 +46,6 @@ export enum PhaseType {
 }
 
 @Table
-@Scopes(() => ({
-  full: {
-    include: [TradingModel],
-  },
-}))
 export class Trade extends Model<Trade> {
   @Column({
     type: DataType.UUID,
@@ -114,17 +110,45 @@ export class Trade extends Model<Trade> {
   })
   phase: PhaseType;
 
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'User',
+      key: 'uuid',
+    },
+  })
+  authorId: string;
+
+  @BelongsTo(() => User)
+  author: User;
+
   @ForeignKey(() => TradingModel)
-  @Column
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'TradingModel',
+      key: 'uuid',
+    },
+  })
   tradingModelId: string;
 
   @BelongsTo(() => TradingModel)
   tradingModel: TradingModel;
 
-  @ForeignKey(() => User)
-  @Column
-  authorId: string;
+  @ForeignKey(() => Journal)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'Journal',
+      key: 'uuid',
+    },
+  })
+  journalId: string;
 
-  @BelongsTo(() => User)
-  author: User;
+  @BelongsTo(() => Journal)
+  journal: Journal;
 }

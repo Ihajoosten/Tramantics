@@ -30,6 +30,11 @@ export class TradeController {
   constructor(private readonly tradeService: TradeService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'The resource was created successfully' })
+  @ApiForbiddenResponse({ description: 'Unauthorized Request' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin', 'Customer')
   create(@Body() createTradeDTO: CreateTradeDTO): Promise<Trade> {
     return this.tradeService.create(createTradeDTO);
   }

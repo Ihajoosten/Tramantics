@@ -4,6 +4,7 @@ import {
   DataType,
   ForeignKey,
   Model,
+  Scopes,
   Table,
 } from 'sequelize-typescript';
 import { User } from '../user/user.entity';
@@ -39,7 +40,14 @@ export class TradingModel extends Model<TradingModel> {
   marketCondition: Array<MarketType>;
 
   @ForeignKey(() => User)
-  @Column
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'User',
+      key: 'uuid',
+    },
+  })
   authorId: string;
 
   @BelongsTo(() => User)

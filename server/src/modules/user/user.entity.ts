@@ -18,11 +18,6 @@ export enum UserRole {
 }
 
 @Table
-@Scopes(() => ({
-  full: {
-    include: [Trade, TradingModel],
-  },
-}))
 export class User extends Model<User> {
   @Column({
     type: DataType.UUID,

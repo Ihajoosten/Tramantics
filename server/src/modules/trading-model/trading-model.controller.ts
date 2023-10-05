@@ -30,6 +30,11 @@ export class TradingModelController {
   constructor(private readonly tradingModelService: TradingModelService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'The resource was created successfully' })
+  @ApiForbiddenResponse({ description: 'Unauthorized Request' })
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('Admin', 'Customer')
   create(
     @Body() createTradingModelDTO: CreateTradingModelDTO,
   ): Promise<TradingModel> {

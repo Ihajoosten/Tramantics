@@ -6,6 +6,7 @@ import { databaseConfig } from './database.config';
 import { User } from '../../modules/user/user.entity';
 import { Trade } from 'src/modules/trade/trade.entity';
 import { TradingModel } from 'src/modules/trading-model/trading-model.entity';
+import { Journal } from 'src/modules/journal/journal.entity';
 
 export const databaseProviders = [
   {
@@ -26,7 +27,7 @@ export const databaseProviders = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Trade, TradingModel]);
+      sequelize.addModels([User, Trade, TradingModel, Journal]);
       await sequelize.sync();
       return sequelize;
     },

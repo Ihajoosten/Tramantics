@@ -12,11 +12,6 @@ import { Trade } from '../trade/trade.entity';
 import { User } from '../user/user.entity';
 
 @Table
-@Scopes(() => ({
-  full: {
-    include: [Trade],
-  },
-}))
 export class Journal extends Model<Journal> {
   @Column({
     type: DataType.UUID,
@@ -35,7 +30,14 @@ export class Journal extends Model<Journal> {
   trades: Array<Trade>;
 
   @ForeignKey(() => User)
-  @Column
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'User',
+      key: 'uuid',
+    },
+  })
   authorId: string;
 
   @BelongsTo(() => User)
