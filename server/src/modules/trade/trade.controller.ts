@@ -52,7 +52,7 @@ export class TradeController {
   @ApiOkResponse({ description: 'The resource was returned successfully' })
   @ApiForbiddenResponse({ description: 'Unauthorized Request' })
   @ApiNotFoundResponse({
-    description: 'Resource not found: Tradig Model was not found',
+    description: 'Resource not found: Trade was not found',
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('Admin', 'Customer')
@@ -64,7 +64,7 @@ export class TradeController {
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'The resource was updated successfully' })
   @ApiNotFoundResponse({
-    description: 'Resource not found: Trades does not Exist',
+    description: 'Resource not found: Trade does not Exist',
   })
   @ApiForbiddenResponse({ description: 'Unauthorized Request' })
   @ApiUnprocessableEntityResponse({
