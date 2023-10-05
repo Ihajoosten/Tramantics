@@ -10,6 +10,8 @@ import { DatabaseModule } from './core/database/database.module';
 
 // Domain Modules
 import { UserModule } from './modules/user/user.module';
+import { TradeModule } from './modules/trade/trade.module';
+import { TradingModelModule } from './modules/trading-model/trading-model.module';
 
 // Filters
 import { ErrorFilter } from './core/filters/error.filter';
@@ -29,11 +31,13 @@ dotenv.config();
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
     AuthModule,
-    UserModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: process.env.TOKEN_EXPIRATION },
     }),
+    UserModule,
+    TradeModule,
+    TradingModelModule,
   ],
   providers: [
     {

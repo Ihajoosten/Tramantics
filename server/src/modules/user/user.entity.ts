@@ -1,12 +1,13 @@
 import {
   Column,
-  CreatedAt,
   DataType,
+  HasMany,
   Model,
   Scopes,
   Table,
-  UpdatedAt,
 } from 'sequelize-typescript';
+import { Trade } from '../trade/trade.entity';
+import { TradingModel } from '../trading-model/trading-model.entity';
 
 export enum UserRole {
   ADMIN = 'Admin',
@@ -18,7 +19,7 @@ export enum UserRole {
 @Table
 @Scopes(() => ({
   full: {
-    include: [],
+    include: [Trade, TradingModel],
   },
 }))
 export class User extends Model<User> {
@@ -65,4 +66,10 @@ export class User extends Model<User> {
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true, allowNull: true })
   isActive: boolean;
+
+  @HasMany(() => Trade)
+  trades: Array<Trade>;
+
+  @HasMany(() => TradingModel)
+  tradingModels: Array<TradingModel>;
 }
