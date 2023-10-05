@@ -2,14 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { NotFoundExceptionFilter } from './core/filters/not-found.filter';
 import { ValidationPipe } from '@nestjs/common';
+import { ErrorFilter } from './core/filters/error.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setGlobalPrefix('api/v1');
 
-  app.useGlobalFilters(new NotFoundExceptionFilter());
+  app.useGlobalFilters(new ErrorFilter());
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
