@@ -7,7 +7,6 @@ export interface IDatabaseConfigAttributes {
   dialect?: string;
   urlDatabase?: string;
   synchronization?: boolean;
-  define?: Object;
 }
 
 export interface IDatabaseConfig {

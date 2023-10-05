@@ -8,9 +8,9 @@ import {
   Patch,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles } from 'src/core/decorators/roles.decorator';
-import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/core/guards/roles.guard';
+import { Roles } from '../../core/decorators/roles.decorator';
+import { JwtAuthGuard } from '../../core/guards/jwt-auth.guard';
+import { RolesGuard } from '../../core/guards/roles.guard';
 import { User } from './user.entity';
 import {
   ApiTags,

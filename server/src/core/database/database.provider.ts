@@ -3,7 +3,7 @@ import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants/index';
 import { databaseConfig } from './database.config';
 
 // Entitites
-import { User } from 'src/modules/user/user.entity';
+import { User } from '../../modules/user/user.entity';
 
 export const databaseProviders = [
   {

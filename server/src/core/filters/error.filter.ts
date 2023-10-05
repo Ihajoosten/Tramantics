@@ -15,6 +15,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
+import { networkInterfaces } from 'os';
 
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
@@ -73,12 +74,12 @@ export class ErrorFilter implements ExceptionFilter {
 }
 
 function getIPAddress() {
-  var interfaces = require('os').networkInterfaces();
-  for (var devName in interfaces) {
-    var iface = interfaces[devName];
+  const interfaces = networkInterfaces();
+  for (const devName in interfaces) {
+    const iface = interfaces[devName];
 
-    for (var i = 0; i < iface.length; i++) {
-      var alias = iface[i];
+    for (let i = 0; i < iface.length; i++) {
+      const alias = iface[i];
       if (
         alias.family === 'IPv4' &&
         alias.address !== '127.0.0.1' &&
