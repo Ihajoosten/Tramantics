@@ -28,5 +28,5 @@ export class TradingModel extends Model<TradingModel> {
     type: DataType.ARRAY(DataType.ENUM({ values: Object.values(MarketType) })),
     allowNull: false,
   })
-  marketCondition: MarketType;
+  marketCondition: Array<MarketType>;
 }

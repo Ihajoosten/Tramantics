@@ -32,28 +32,28 @@ export class UserController {
   @ApiOkResponse({ description: 'The resource was returned successfully' })
   @ApiForbiddenResponse({ description: 'Unauthorized Request' })
   @ApiNotFoundResponse({
-    description: 'Resource not found: Users was not found',
+    description: 'Resource not found: Users were not found',
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
-  async findAll(): Promise<User[]> {
+  @Roles('Admin')
+  async findAll(): Promise<Array<User>> {
     return await this.userService.findAll();
   }
 
-  @Get(':id')
+  @Get(':uuid')
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'The resource was returned successfully' })
   @ApiForbiddenResponse({ description: 'Unauthorized Request' })
   @ApiNotFoundResponse({
-    description: 'Resource not found: User were not found',
+    description: 'Resource not found: User was not found',
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin', 'customer')
-  async findOne(@Param('id') id: string): Promise<User> {
-    return await this.userService.findOne(id);
+  @Roles('Admin', 'Customer')
+  async findOne(@Param('uuid') uuid: string): Promise<User> {
+    return await this.userService.findOne(uuid);
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'The resource was updated successfully' })
   @ApiNotFoundResponse({
@@ -64,15 +64,15 @@ export class UserController {
     description: 'Bad Request: could not update User',
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin', 'customer')
+  @Roles('Admin', 'Customer')
   async update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() updateUser: UpdateUserDTO,
   ): Promise<User> {
-    return await this.userService.update(id, updateUser);
+    return await this.userService.update(uuid, updateUser);
   }
 
-  @Delete(':id')
+  @Delete(':uuid')
   @ApiBearerAuth()
   @ApiOkResponse({ description: 'The resource was returned successfully' })
   @ApiForbiddenResponse({ description: 'Unauthorized Request' })
@@ -80,8 +80,8 @@ export class UserController {
     description: 'Resource not found: User does not exist',
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin')
-  async remove(@Param('id') id: string): Promise<void> {
-    return await this.userService.remove(id);
+  @Roles('Admin')
+  async remove(@Param('uuid') uuid: string): Promise<void> {
+    return await this.userService.remove(uuid);
   }
 }
