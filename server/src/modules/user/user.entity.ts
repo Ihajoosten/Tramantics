@@ -65,12 +65,4 @@ export class User extends Model<User> {
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true, allowNull: true })
   isActive: boolean;
-
-  @CreatedAt
-  @Column({ type: DataType.DATEONLY, allowNull: false })
-  createdAt: Date;
-
-  @UpdatedAt
-  @Column({ type: DataType.DATEONLY, allowNull: false })
-  updatedAt: Date;
 }
