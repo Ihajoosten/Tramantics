@@ -68,5 +68,10 @@ export class CreateTradeDTO {
   phase: PhaseType;
 
   @IsNotEmpty()
+  @IsString()
   tradingModelId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  authorId: string;
 }

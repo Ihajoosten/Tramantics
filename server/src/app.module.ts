@@ -12,6 +12,7 @@ import { DatabaseModule } from './core/database/database.module';
 import { UserModule } from './modules/user/user.module';
 import { TradeModule } from './modules/trade/trade.module';
 import { TradingModelModule } from './modules/trading-model/trading-model.module';
+import { JournalModule } from './modules/journal/journal.module';
 
 // Filters
 import { ErrorFilter } from './core/filters/error.filter';
@@ -38,6 +39,7 @@ dotenv.config();
     UserModule,
     TradeModule,
     TradingModelModule,
+    JournalModule,
   ],
   providers: [
     {

@@ -8,6 +8,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { TradingModel } from '../trading-model/trading-model.entity';
+import { User } from '../user/user.entity';
 
 export enum DayOfWeek {
   MONDAY = 'Monday',
@@ -119,4 +120,11 @@ export class Trade extends Model<Trade> {
 
   @BelongsTo(() => TradingModel)
   tradingModel: TradingModel;
+
+  @ForeignKey(() => User)
+  @Column
+  authorId: string;
+
+  @BelongsTo(() => User)
+  author: User;
 }
