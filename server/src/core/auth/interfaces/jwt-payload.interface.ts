@@ -1,4 +1,4 @@
-import { UserRole } from 'src/modules/user/user.entity';
+import { UserRole } from '../../../modules/user/user.entity';
 
 export interface JwtPayload {
   uuid: string;

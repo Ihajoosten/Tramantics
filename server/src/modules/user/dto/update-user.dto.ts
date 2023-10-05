@@ -10,7 +10,7 @@ import {
   MaxLength,
   Matches,
 } from 'class-validator';
-import { ToPhone } from 'src/core/decorators/to-phone.decorator';
+import { ToPhone } from '../../../core/decorators/to-phone.decorator';
 import { UserRole } from '../user.entity';
 
 export class UpdateUserDTO {

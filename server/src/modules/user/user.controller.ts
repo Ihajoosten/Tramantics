@@ -8,9 +8,9 @@ import {
   Patch,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles } from 'src/core/decorators/roles.decorator';
-import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/core/guards/roles.guard';
+import { Roles } from '../../core/decorators/roles.decorator';
+import { JwtAuthGuard } from '../../core/guards/jwt-auth.guard';
+import { RolesGuard } from '../../core/guards/roles.guard';
 import { User } from './user.entity';
 import {
   ApiTags,
@@ -36,8 +36,8 @@ export class UserController {
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  findAll(): Promise<User[]> {
-    return this.userService.findAll();
+  async findAll(): Promise<User[]> {
+    return await this.userService.findAll();
   }
 
   @Get(':id')
@@ -49,8 +49,8 @@ export class UserController {
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin', 'customer')
-  findOne(@Param('id') id: string): Promise<User> {
-    return this.userService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<User> {
+    return await this.userService.findOne(id);
   }
 
   @Patch(':id')
@@ -65,11 +65,11 @@ export class UserController {
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin', 'customer')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateUser: UpdateUserDTO,
   ): Promise<User> {
-    return this.userService.update(id, updateUser);
+    return await this.userService.update(id, updateUser);
   }
 
   @Delete(':id')
@@ -81,7 +81,7 @@ export class UserController {
   })
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.userService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    return await this.userService.remove(id);
   }
 }
