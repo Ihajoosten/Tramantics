@@ -21,7 +21,7 @@ export class JournalService {
 
   async findOne(uuid: string): Promise<Journal> {
     const journal = await this.journalRepo.findByPk(uuid, {
-      include: ['trades', 'author'],
+      include: ['user', 'trades'],
     });
     if (!journal) {
       throw new NotFoundException('Journal not found');

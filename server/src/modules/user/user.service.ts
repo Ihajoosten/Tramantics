@@ -15,7 +15,7 @@ export class UserService {
   }
 
   async findOne(uuid: string): Promise<User> {
-    const user = await this.userRepo.findByPk(uuid);
+    const user = await this.userRepo.findByPk(uuid, { include: ['journals'] });
     if (!user) {
       throw new NotFoundException('User not found');
     }

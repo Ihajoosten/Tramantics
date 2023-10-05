@@ -20,7 +20,9 @@ export class TradeService {
   }
 
   async findOne(uuid: string): Promise<Trade> {
-    const trade = await this.tradeRepo.findByPk(uuid);
+    const trade = await this.tradeRepo.findByPk(uuid, {
+      include: ['journal', 'tradingModel'],
+    });
     if (!trade) {
       throw new NotFoundException('Trade not found');
     }

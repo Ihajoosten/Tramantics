@@ -110,40 +110,12 @@ export class Trade extends Model<Trade> {
   })
   phase: PhaseType;
 
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.UUID,
-    allowNull: false,
-    references: {
-      model: 'User',
-      key: 'uuid',
-    },
-  })
-  authorId: string;
-
-  @BelongsTo(() => User)
-  author: User;
-
-  @ForeignKey(() => TradingModel)
-  @Column({
-    type: DataType.UUID,
-    allowNull: false,
-    references: {
-      model: 'TradingModel',
-      key: 'uuid',
-    },
-  })
-  tradingModelId: string;
-
-  @BelongsTo(() => TradingModel)
-  tradingModel: TradingModel;
-
   @ForeignKey(() => Journal)
   @Column({
     type: DataType.UUID,
     allowNull: false,
     references: {
-      model: 'Journal',
+      model: 'Journals',
       key: 'uuid',
     },
   })
@@ -151,4 +123,18 @@ export class Trade extends Model<Trade> {
 
   @BelongsTo(() => Journal)
   journal: Journal;
+
+  @ForeignKey(() => TradingModel)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+    references: {
+      model: 'TradingModels',
+      key: 'uuid',
+    },
+  })
+  tradingModelId: string;
+
+  @BelongsTo(() => TradingModel)
+  tradingModel: TradingModel;
 }

@@ -63,12 +63,6 @@ export class User extends Model<User> {
   @Column({ type: DataType.BOOLEAN, defaultValue: true, allowNull: true })
   isActive: boolean;
 
-  @HasMany(() => Trade)
-  trades: Array<Trade>;
-
-  @HasMany(() => TradingModel)
-  tradingModels: Array<TradingModel>;
-
   @HasMany(() => Journal)
   journals: Array<Journal>;
 }

@@ -26,20 +26,20 @@ export class Journal extends Model<Journal> {
   @Column({ type: DataType.STRING, allowNull: false })
   summary: string;
 
-  @HasMany(() => Trade)
-  trades: Array<Trade>;
-
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
     allowNull: false,
     references: {
-      model: 'User',
+      model: 'Users',
       key: 'uuid',
     },
   })
-  authorId: string;
+  userId: string;
 
   @BelongsTo(() => User)
-  author: User;
+  user: User;
+
+  @HasMany(() => Trade)
+  trades: Array<Trade>;
 }
