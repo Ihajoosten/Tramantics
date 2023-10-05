@@ -12,7 +12,10 @@ import { DatabaseModule } from './core/database/database.module';
 import { UserModule } from './modules/user/user.module';
 
 // Filters
-import { NotFoundExceptionFilter } from './core/filters/not-found.filter';
+import { ErrorFilter } from './core/filters/error.filter';
+
+// Middlewares
+import { LoggingMiddleware } from './core/middleware/logger.middleware';
 
 // Custom Imports
 import * as express from 'express';
@@ -35,7 +38,7 @@ dotenv.config();
   providers: [
     {
       provide: APP_FILTER,
-      useClass: NotFoundExceptionFilter,
+      useClass: ErrorFilter,
     },
   ],
 })
@@ -45,5 +48,8 @@ export class AppModule implements NestModule {
     consumer.apply(express.json()).forRoutes('*');
     consumer.apply(express.urlencoded({ extended: true })).forRoutes('*');
     consumer.apply(cors()).forRoutes('*');
+
+    // Logging Middleware
+    consumer.apply(LoggingMiddleware).forRoutes('*');
   }
 }
